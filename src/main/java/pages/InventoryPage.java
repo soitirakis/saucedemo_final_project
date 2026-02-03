@@ -2,6 +2,10 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class InventoryPage extends BasePage{
     public InventoryPage(WebDriver driver) {
@@ -11,8 +15,20 @@ public class InventoryPage extends BasePage{
     //elements
     private By header = By.className("app_logo");
     private By logoutButton = By.id("logout_sidebar_link");
-    private By addToCartButton = By.id("add-to-cart-sauce-labs-backpack");
-    private By removeFromCartButton = By.id("remove-sauce-labs-backpack");
+    private By shoppingCart = By.id("shopping_cart_container");
+    private By inventoryItemName = By.className("inventory_item_name");
+    private By shoppingCartBadge = By.className("shopping_cart_badge");
+
+
+    //elements containers actions
+    private By addToCartButton(String item) {
+        return By.id(item);
+    }
+    private By removeFromCartButton(String item) {
+        return By.id(item);
+    }
+
+
 
     //actions
     public String getHeaderText(){
@@ -21,5 +37,24 @@ public class InventoryPage extends BasePage{
     public boolean isLogoutDisplayed(){
         return driver.findElement(logoutButton).isDisplayed();
     }
-
+    public boolean isShoppingCartDisplayed(){
+        return driver.findElement(shoppingCart).isDisplayed();
+    }
+    public List<String> getInventoryListItems() {
+        List<WebElement> classInventoryItems = driver.findElements(inventoryItemName);
+        List<String> items = new ArrayList<>();
+        for(WebElement item : classInventoryItems){
+            items.add(item.getText());
+        }
+        return items;
+    }
+    public void addItemToCart(String item) {
+        driver.findElement(addToCartButton(item)).click();
+    }
+    public boolean removeFromCartButtonDisplayed(String item) {
+        return  driver.findElement(removeFromCartButton(item)).isDisplayed();
+    }
+    public boolean shoppingCartBadgeDisplayed() {
+        return driver.findElement(shoppingCartBadge).isDisplayed();
+    }
 }

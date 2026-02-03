@@ -10,7 +10,7 @@ public class LoginTests extends BaseTests{
         loginUser =  new Login("standard_user");
         loginPage.authenticate(loginUser);
 
-        //Assert.assertTrue(inventoryPage.isLogoutDisplayed());
+        Assert.assertTrue(inventoryPage.isShoppingCartDisplayed());
         Assert.assertEquals(inventoryPage.getHeaderText(), "Swag Labs");
     }
     @Test
