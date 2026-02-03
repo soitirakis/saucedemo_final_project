@@ -34,7 +34,13 @@ public class InventoryTests extends BaseTests {
 
         inventoryPage.addItemToCart(itemToAddToCart);
 
-        Assert.assertTrue(inventoryPage.removeFromCartButtonDisplayed(itemRemoveButton));
-        Assert.assertTrue(inventoryPage.shoppingCartBadgeDisplayed());
+        Assert.assertTrue(inventoryPage.removeFromCartButtonDisplayed(itemRemoveButton), "Remove button is not displayed: " +  itemRemoveButton);
+        inventoryPage.waitCartBadgeVisible();
+        Assert.assertTrue(inventoryPage.shoppingCartBadgeDisplayed(), "Cart badge is not displayed: " +  itemRemoveButton);
+
+        inventoryPage.removeItemFromCart(itemRemoveButton);
+        //inventoryPage.waitCartBadgeGone();
+        //Assert.assertTrue(inventoryPage.addItemToCartButtonDisplayed(itemToAddToCart), "Remove button still displayed: " +  itemToAddToCart);
+        Assert.assertFalse(inventoryPage.shoppingCartBadgeDisplayed(), "Cart badge not empty");
     }
 }

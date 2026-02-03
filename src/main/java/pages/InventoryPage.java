@@ -1,6 +1,8 @@
 package pages;
 
+import driver.WaitUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -51,10 +53,35 @@ public class InventoryPage extends BasePage{
     public void addItemToCart(String item) {
         driver.findElement(addToCartButton(item)).click();
     }
+    public void removeItemFromCart(String item) {
+        driver.findElement(removeFromCartButton(item)).click();
+    }
+    public boolean addItemToCartButtonDisplayed(String item) {
+        try {
+            WaitUtils.visibilityOfElementLocated(addToCartButton(item)).isDisplayed();
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
+        //return driver.findElement(addToCartButton(item)).isDisplayed();
+    }
     public boolean removeFromCartButtonDisplayed(String item) {
-        return  driver.findElement(removeFromCartButton(item)).isDisplayed();
+        try {
+            WaitUtils.visibilityOfElementLocated(removeFromCartButton(item)).isDisplayed();
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
+        //return  driver.findElement(removeFromCartButton(item)).isDisplayed();
     }
     public boolean shoppingCartBadgeDisplayed() {
-        return driver.findElement(shoppingCartBadge).isDisplayed();
+        List<WebElement> shoppingCartItems = driver.findElements(shoppingCart);
+        return !shoppingCartItems.isEmpty() && shoppingCartItems.get(0).isDisplayed();
+    }
+    public void waitCartBadgeVisible() {
+        WaitUtils.visibilityOfElementLocated(shoppingCartBadge);
+    }
+    public void waitCartBadgeGone() {
+        WaitUtils.invisibilityOfElementLocated(shoppingCartBadge);
     }
 }
