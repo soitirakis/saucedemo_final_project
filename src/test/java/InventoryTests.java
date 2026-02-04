@@ -20,27 +20,32 @@ public class InventoryTests extends BaseTests {
         Assert.assertTrue(inventoryPage.isShoppingCartDisplayed());
     }
     @Test
-    public void addRandomItemToCartTests() {
-        List<String> inventoryItemsList = inventoryPage.getInventoryListItems();
+    public void addRandomItemToCartTests() throws InterruptedException{
+
+        List<String> inventoryItemsList = inventoryPage.getInventoryListItems(); //list of article names in inventory
         int inventoryListSize = inventoryItemsList.size();
-        String item = inventoryItemsList.get(generateNumber(inventoryListSize));
+        String item = inventoryItemsList.get(generateNumber(inventoryListSize)); // generate random item from List
 
         System.out.println("item: " + item);
 
-        String itemToAddToCart = generateItemToAddToCart(item);
-        String itemRemoveButton = generateItemToRemoveFromCart(item);
+        String itemToAddToCart = generateItemToAddToCart(item);  //generate item to be added to cart <<add-to-cart-name>>
+        String itemRemoveButton = generateItemToRemoveFromCart(item); //generate item to be removed from cart <<remove-item-name>>
         System.out.println("itemToClick: " + itemToAddToCart);
         System.out.println("itemRemoveButton: " + itemRemoveButton);
 
-        inventoryPage.addItemToCart(itemToAddToCart);
+        inventoryPage.addItemToCart(itemToAddToCart);   //add item to cart
 
         Assert.assertTrue(inventoryPage.removeFromCartButtonDisplayed(itemRemoveButton), "Remove button is not displayed: " +  itemRemoveButton);
-        inventoryPage.waitCartBadgeVisible();
+        inventoryPage.waitCartBadgeVisible();  //wait for cart badge to be visible
         Assert.assertTrue(inventoryPage.shoppingCartBadgeDisplayed(), "Cart badge is not displayed: " +  itemRemoveButton);
 
-        inventoryPage.removeItemFromCart(itemRemoveButton);
+
+        inventoryPage.waitRemoveButtonDisplayed(itemRemoveButton);  //wait for the remove button to be displayed
+        inventoryPage.removeItemFromCart(itemRemoveButton);  //remove the item from cart
+        inventoryPage.addItemToCartButtonDisplayed(itemToAddToCart); //wait for <<add to cart>> button to be displayed
+
         //inventoryPage.waitCartBadgeGone();
-        //Assert.assertTrue(inventoryPage.addItemToCartButtonDisplayed(itemToAddToCart), "Remove button still displayed: " +  itemToAddToCart);
-        Assert.assertFalse(inventoryPage.shoppingCartBadgeDisplayed(), "Cart badge not empty");
+        Assert.assertTrue(inventoryPage.addItemToCartButtonDisplayed(itemToAddToCart), "Remove button still displayed: " +  itemRemoveButton);
+        //Assert.assertFalse(inventoryPage.shoppingCartBadgeDisplayed(), "Cart badge not empty");
     }
 }

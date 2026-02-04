@@ -13,7 +13,7 @@ public class RandomGenerator {
 
     public static String generateItemFormat(String item) {
         String itemToLower = item.toLowerCase(Locale.ENGLISH);
-        String itemToFormat = itemToLower.replaceAll(" ", "-");
+        String itemToFormat = itemToLower.trim().replaceAll("\\s+", "-");
         return itemToFormat;
     }
 

@@ -22,7 +22,7 @@ public class WaitUtils {
     public static boolean textToBePresentInElementLocated(By locator, String text) {
         return wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, text));
     }
-    public static WebElement elementToBeClickable(By  locator) {
+    public static WebElement elementToBeClickable(By locator) {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
     public static WebElement visibilityOfElementLocated(By locator) {
@@ -30,5 +30,8 @@ public class WaitUtils {
     }
     public static boolean invisibilityOfElementLocated(By locator) {
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
+    public static boolean stalenessOf(WebElement item) {
+        return wait.until(ExpectedConditions.stalenessOf(item));
     }
 }

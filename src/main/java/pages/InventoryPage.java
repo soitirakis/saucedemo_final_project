@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,6 @@ public class InventoryPage extends BasePage{
     }
 
 
-
     //actions
     public String getHeaderText(){
         return driver.findElement(header).getText();
@@ -51,10 +51,43 @@ public class InventoryPage extends BasePage{
         return items;
     }
     public void addItemToCart(String item) {
-        driver.findElement(addToCartButton(item)).click();
+        WaitUtils.elementToBeClickable(addToCartButton(item)).click();
+        //driver.findElement(addToCartButton(item)).click();
     }
-    public void removeItemFromCart(String item) {
-        driver.findElement(removeFromCartButton(item)).click();
+    public void removeItemFromCart(String item) throws InterruptedException{
+        System.out.println("Click remove: " +item);
+
+        WaitUtils.elementToBeClickable(removeFromCartButton(item));
+
+        try {
+            driver.findElement(removeFromCartButton(item)).click();
+        }catch (Exception e){
+            System.out.println("click failed: " + e.getMessage());
+            throw e;
+        }
+
+        //trying to catch the exceptions if unable to click
+       /* WebElement el = WaitUtils.elementToBeClickable(removeFromCartButton(item));
+
+        System.out.println("REMOVE id: " + item);
+        System.out.println("Displayed: " + el.isDisplayed());
+        System.out.println("Enabled: " + el.isEnabled());
+        System.out.println("text: " + el.getText());
+
+        try {
+            el.click();
+        }catch (Exception e){
+            System.out.println("Click failed: " + e.getClass() + "->" + e.getMessage());
+            throw e;
+        }*/
+
+        //WaitUtils.stalenessOf(removeFromCartButton(item));
+        System.out.println("Clicked remove");
+        //driver.findElement(removeFromCartButton(item)).click();
+
+    }
+    public String getRemoveButtonText(String item) {
+        return driver.findElement(removeFromCartButton(item)).getText();
     }
     public boolean addItemToCartButtonDisplayed(String item) {
         try {
@@ -63,7 +96,6 @@ public class InventoryPage extends BasePage{
         } catch (TimeoutException e) {
             return false;
         }
-        //return driver.findElement(addToCartButton(item)).isDisplayed();
     }
     public boolean removeFromCartButtonDisplayed(String item) {
         try {
@@ -72,7 +104,6 @@ public class InventoryPage extends BasePage{
         } catch (TimeoutException e) {
             return false;
         }
-        //return  driver.findElement(removeFromCartButton(item)).isDisplayed();
     }
     public boolean shoppingCartBadgeDisplayed() {
         List<WebElement> shoppingCartItems = driver.findElements(shoppingCart);
@@ -83,5 +114,8 @@ public class InventoryPage extends BasePage{
     }
     public void waitCartBadgeGone() {
         WaitUtils.invisibilityOfElementLocated(shoppingCartBadge);
+    }
+    public void waitRemoveButtonDisplayed(String item) {
+        WaitUtils.visibilityOfElementLocated(removeFromCartButton(item));
     }
 }
