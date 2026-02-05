@@ -5,6 +5,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DriverFactory {
 
@@ -25,7 +27,15 @@ public class DriverFactory {
         chromeOption.addArguments("disable-extensions"); // Disable extensions
         chromeOption.addArguments("guest"); // Disable change password popup
 
-        driver = new ChromeDriver();
+        Map<String, Object> prefs = new HashMap<>();
+        prefs.put("credentials_enable_service", false);
+        prefs.put("profile.password_manager_enabled", false);
+        chromeOption.setExperimentalOption("prefs", prefs);
+
+        chromeOption.addArguments("--disable-save-password-bubble");
+        chromeOption.addArguments("--disable-notifications");
+
+        driver = new ChromeDriver(chromeOption);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
 

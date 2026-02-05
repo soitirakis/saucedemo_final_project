@@ -27,4 +27,15 @@ public class RandomGenerator {
         String result = prefix + generateItemFormat(item);
         return result;
     }
+
+    public static String generateRandomName() {
+        String characters = "abcdefghijklmnopqrstuvwxyz";
+        StringBuilder name = new StringBuilder();
+        Random rnd = new Random();
+        while (name.length() < 10) {
+            int index = (int) (rnd.nextFloat() * characters.length());
+            name.append(characters.charAt(index));
+        }
+        return name.toString();
+    }
 }

@@ -30,6 +30,9 @@ public class InventoryPage extends BasePage{
     private By removeFromCartButton(String item) {
         return By.id(item);
     }
+    private By clickOnItem(String item) {
+        return By.xpath("//div[contains(@class,'inventory_item_name')][contains(.,\""+item+"\")]");
+    }
 
 
     //actions
@@ -58,6 +61,7 @@ public class InventoryPage extends BasePage{
         System.out.println("Click remove: " +item);
 
         WaitUtils.elementToBeClickable(removeFromCartButton(item));
+        WaitUtils.textToBePresentInElementLocated(removeFromCartButton(item), "Remove");
 
         try {
             driver.findElement(removeFromCartButton(item)).click();
@@ -65,26 +69,7 @@ public class InventoryPage extends BasePage{
             System.out.println("click failed: " + e.getMessage());
             throw e;
         }
-
-        //trying to catch the exceptions if unable to click
-       /* WebElement el = WaitUtils.elementToBeClickable(removeFromCartButton(item));
-
-        System.out.println("REMOVE id: " + item);
-        System.out.println("Displayed: " + el.isDisplayed());
-        System.out.println("Enabled: " + el.isEnabled());
-        System.out.println("text: " + el.getText());
-
-        try {
-            el.click();
-        }catch (Exception e){
-            System.out.println("Click failed: " + e.getClass() + "->" + e.getMessage());
-            throw e;
-        }*/
-
-        //WaitUtils.stalenessOf(removeFromCartButton(item));
         System.out.println("Clicked remove");
-        //driver.findElement(removeFromCartButton(item)).click();
-
     }
     public String getRemoveButtonText(String item) {
         return driver.findElement(removeFromCartButton(item)).getText();
@@ -106,7 +91,7 @@ public class InventoryPage extends BasePage{
         }
     }
     public boolean shoppingCartBadgeDisplayed() {
-        List<WebElement> shoppingCartItems = driver.findElements(shoppingCart);
+        List<WebElement> shoppingCartItems = driver.findElements(shoppingCartBadge);
         return !shoppingCartItems.isEmpty() && shoppingCartItems.get(0).isDisplayed();
     }
     public void waitCartBadgeVisible() {
@@ -117,5 +102,10 @@ public class InventoryPage extends BasePage{
     }
     public void waitRemoveButtonDisplayed(String item) {
         WaitUtils.visibilityOfElementLocated(removeFromCartButton(item));
+    }
+
+    public void clickOnRandomItem(String item) {
+        System.out.println(item);
+        driver.findElement(clickOnItem(item)).click();
     }
 }

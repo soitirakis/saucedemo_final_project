@@ -3,7 +3,6 @@ package driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -30,8 +29,5 @@ public class WaitUtils {
     }
     public static boolean invisibilityOfElementLocated(By locator) {
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
-    }
-    public static boolean stalenessOf(WebElement item) {
-        return wait.until(ExpectedConditions.stalenessOf(item));
     }
 }
