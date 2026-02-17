@@ -41,6 +41,6 @@ public class CheckoutStepOne extends BasePage {
         addFirstName(userInfo.getFirstName());
         addLastName(userInfo.getLastName());
         addZipCode(userInfo.getZipCode());
-        //continueButtonClick();
+        continueButtonClick();
     }
 }

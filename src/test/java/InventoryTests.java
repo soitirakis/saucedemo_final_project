@@ -2,9 +2,11 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.CheckoutStepOne;
+import pages.CheckoutStepTwo;
 import pages.InventoryItemPage;
 import pages.ShoppingCart;
 import testdata.classes.CheckoutInformation;
+import testdata.classes.ItemDetails;
 import testdata.classes.Login;
 import testdata.classes.UserData;
 import utils.Writer;
@@ -18,6 +20,7 @@ public class InventoryTests extends BaseTests {
     static InventoryItemPage inventoryItem;
     static ShoppingCart shoppingCart;
     static CheckoutStepOne checkoutStepOne;
+    static ItemDetails itemDetails;
 
     @BeforeMethod
     public void beforeMethod() {
@@ -63,6 +66,35 @@ public class InventoryTests extends BaseTests {
     }
 
     @Test
+    public void addCertainItemToCartTest() {
+        itemDetails = new ItemDetails("item_details");
+        shoppingCart = new  ShoppingCart(driver);//item to be added
+
+        String title = itemDetails.getTitle();
+        System.out.println("title: " + title);
+        String itemToAddToCart =  generateItemToAddToCart(title);
+        String itemToRemove = generateItemToRemoveFromCart(title);
+
+        inventoryPage.addItemToCart(itemToAddToCart);  //add item to cart
+        inventoryPage.clickOnShoppingCart();
+
+        Assert.assertEquals(shoppingCart.getItemTitle(), itemDetails.getTitle());  //have same title json + cart
+        Assert.assertEquals(shoppingCart.getItemDescription(), itemDetails.getDescription()); //have same description
+        Assert.assertEquals(shoppingCart.getItemPrice(), itemDetails.getPriceTag()+itemDetails.getPrice());
+        Assert.assertTrue(shoppingCart.setCheckoutButtonDisplayed());
+        Assert.assertTrue(shoppingCart.isRemoveButtonDisplayed(itemToRemove), "Remove button is not displayed: " +  itemToRemove);
+
+
+        //remove item from cart
+        shoppingCart.clickOnRemoveButton(itemToRemove);
+        shoppingCart.waitRemoveButtonGone(itemToRemove);
+        Assert.assertFalse(shoppingCart.isRemoveButtonDisplayed(itemToRemove), "Remove button is not displayed: " +  itemToRemove);
+        //TODO
+        //description is empty
+        //QTY empty
+    }
+
+    @Test
     public void navigateToItem(){
         List<String> inventoryItemsList = inventoryPage.getInventoryListItems(); //list of article names in inventory
         int inventoryListSize = inventoryItemsList.size();
@@ -95,6 +127,14 @@ public class InventoryTests extends BaseTests {
 
         CheckoutInformation checkoutUser = new CheckoutInformation("checkout_information");
         checkoutStepOne.checkoutInformationContinueButton(checkoutUser);
+
+        CheckoutStepTwo checkoutStepTwo = new CheckoutStepTwo(driver);
+        //TODO
+        //json cu produsul title, description, tax, total.
+        //assert ca valorile sunt la fel.
+        //click on finish
+        //checkout complete
+
 
     }
 }

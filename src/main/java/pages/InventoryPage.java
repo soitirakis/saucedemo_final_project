@@ -108,4 +108,8 @@ public class InventoryPage extends BasePage{
         System.out.println(item);
         driver.findElement(clickOnItem(item)).click();
     }
+
+    public void clickOnShoppingCart(){
+        driver.findElement(shoppingCart).click();
+    }
 }
