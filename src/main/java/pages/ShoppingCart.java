@@ -36,6 +36,10 @@ public class ShoppingCart extends BasePage{
         List<WebElement> shoppingCartItems = driver.findElements(removeButton(item));
         return !shoppingCartItems.isEmpty() && shoppingCartItems.get(0).isDisplayed();
     }
+    public boolean isItemDescriptionDisplayed(){
+        List<WebElement> shoppingCartItemDescriptions = driver.findElements(itemDescription);
+        return !shoppingCartItemDescriptions.isEmpty() && shoppingCartItemDescriptions.get(0).isDisplayed();
+    }
 
     public void  clickOnCheckoutButton() {
         driver.findElement(checkoutButton).click();
@@ -58,5 +62,8 @@ public class ShoppingCart extends BasePage{
     //waits
     public void waitRemoveButtonGone(String item) {
         WaitUtils.invisibilityOfElementLocated(removeButton(item));
+    }
+    public void waitItemDescriptionGone() {
+        WaitUtils.invisibilityOfElementLocated(itemDescription);
     }
 }

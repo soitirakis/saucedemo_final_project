@@ -13,7 +13,7 @@ public class CheckoutStepTwo extends BasePage {
     private By itemName = By.className("inventory_item_name");
     private By itemDescription = By.className("inventory_item_desc");
     private By itemPrice = By.className("inventory_item_price");
-    private By tax = By.className("summary_tax_label");
+    private By taxLabel = By.className("summary_tax_label");
     private By totalSum = By.className("summary_total_label");
     private By finishButton = By.id("finish");
 
@@ -31,10 +31,14 @@ public class CheckoutStepTwo extends BasePage {
         return driver.findElement(itemPrice).getText();
     }
     public String getTax(){
-        return driver.findElement(tax).getText();
+        String tax = driver.findElement(taxLabel).getText();
+        String[] myArray = tax.split(" ");
+        return myArray[1];
     }
     public String getTotalSum(){
-        return driver.findElement(totalSum).getText();
+        String sum = driver.findElement(totalSum).getText();
+        String[] myArray = sum.split(" ");
+        return myArray[1];
     }
     public void clickFinishButton(){
         driver.findElement(finishButton).click();

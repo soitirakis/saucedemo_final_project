@@ -1,10 +1,7 @@
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.CheckoutStepOne;
-import pages.CheckoutStepTwo;
-import pages.InventoryItemPage;
-import pages.ShoppingCart;
+import pages.*;
 import testdata.classes.CheckoutInformation;
 import testdata.classes.ItemDetails;
 import testdata.classes.Login;
@@ -13,6 +10,7 @@ import utils.Writer;
 
 import java.util.List;
 
+import static testdata.pages.CheckoutCompleteTestData.*;
 import static testdata.pages.LoginTestData.HEADER_LOGIN;
 import static utils.RandomGenerator.*;
 
@@ -67,7 +65,7 @@ public class InventoryTests extends BaseTests {
 
     @Test
     public void addCertainItemToCartTest() {
-        itemDetails = new ItemDetails("item_details");
+        itemDetails = new ItemDetails("item_details"); //item: Sauce Labs Backpack
         shoppingCart = new  ShoppingCart(driver);//item to be added
 
         String title = itemDetails.getTitle();
@@ -80,7 +78,7 @@ public class InventoryTests extends BaseTests {
 
         Assert.assertEquals(shoppingCart.getItemTitle(), itemDetails.getTitle());  //have same title json + cart
         Assert.assertEquals(shoppingCart.getItemDescription(), itemDetails.getDescription()); //have same description
-        Assert.assertEquals(shoppingCart.getItemPrice(), itemDetails.getPriceTag()+itemDetails.getPrice());
+        Assert.assertEquals(shoppingCart.getItemPrice(), itemDetails.getPriceTag()+itemDetails.getPrice()); //have same price
         Assert.assertTrue(shoppingCart.setCheckoutButtonDisplayed());
         Assert.assertTrue(shoppingCart.isRemoveButtonDisplayed(itemToRemove), "Remove button is not displayed: " +  itemToRemove);
 
@@ -89,8 +87,10 @@ public class InventoryTests extends BaseTests {
         shoppingCart.clickOnRemoveButton(itemToRemove);
         shoppingCart.waitRemoveButtonGone(itemToRemove);
         Assert.assertFalse(shoppingCart.isRemoveButtonDisplayed(itemToRemove), "Remove button is not displayed: " +  itemToRemove);
+
+        shoppingCart.waitItemDescriptionGone();
+        Assert.assertFalse(shoppingCart.isItemDescriptionDisplayed(), "Item description is not displayed: " +  itemToRemove);
         //TODO
-        //description is empty
         //QTY empty
     }
 
@@ -134,7 +134,60 @@ public class InventoryTests extends BaseTests {
         //assert ca valorile sunt la fel.
         //click on finish
         //checkout complete
+    }
 
+    @Test
+    public void buyCertainItemTest() {
+        itemDetails = new ItemDetails("item_details"); //item: Sauce Labs Backpack
+        shoppingCart = new  ShoppingCart(driver);
 
+        String title = itemDetails.getTitle();
+        System.out.println("title: " + title);
+        String itemToAddToCart =  generateItemToAddToCart(title);
+        String itemToRemove = generateItemToRemoveFromCart(title);
+
+        inventoryPage.addItemToCart(itemToAddToCart);  //add item to cart
+        inventoryPage.clickOnShoppingCart();  //go to shopping cart
+
+        Assert.assertTrue(shoppingCart.isYourCartTitleDisplayed());
+
+        Assert.assertEquals(shoppingCart.getItemTitle(), itemDetails.getTitle());  //have same title json + cart
+        Assert.assertEquals(shoppingCart.getItemDescription(), itemDetails.getDescription()); //have same description
+        Assert.assertEquals(shoppingCart.getItemPrice(), itemDetails.getPriceTag()+itemDetails.getPrice()); //have same price
+        Assert.assertTrue(shoppingCart.setCheckoutButtonDisplayed());
+        Assert.assertTrue(shoppingCart.isRemoveButtonDisplayed(itemToRemove), "Remove button is not displayed: " +  itemToRemove);
+
+        shoppingCart.clickOnCheckoutButton(); //checkout the product
+        checkoutStepOne = new CheckoutStepOne(driver);
+
+        Assert.assertTrue(checkoutStepOne.getCheckoutInformationTitleDisplayed());
+
+        //generate the buyer
+        String firstName = generateRandomName();
+        String lastName = generateRandomName();
+        String zipCode = "12345";
+
+        UserData user =  new UserData(firstName, lastName, zipCode);
+        Writer.writeValidNewUser(user, "checkout_information"); //write json with buyer details
+
+        CheckoutInformation checkoutUser = new CheckoutInformation("checkout_information");
+        checkoutStepOne.checkoutInformationContinueButton(checkoutUser); //checkout user
+
+        CheckoutStepTwo checkoutStepTwo = new CheckoutStepTwo(driver);
+
+        Assert.assertEquals(checkoutStepTwo.getHeader(), "Checkout: Overview");
+        Assert.assertEquals(checkoutStepTwo.getItemName(), itemDetails.getTitle());
+        Assert.assertEquals(checkoutStepTwo.getItemDescription(), itemDetails.getDescription());
+        Assert.assertEquals(checkoutStepTwo.getItemPrice(), itemDetails.getPriceTag()+itemDetails.getPrice());
+        Assert.assertEquals(checkoutStepTwo.getTax(), itemDetails.getPriceTag()+itemDetails.getTax());
+        Assert.assertEquals(checkoutStepTwo.getTotalSum(),itemDetails.getPriceTag()+itemDetails.getTotalPrice());
+
+        checkoutStepTwo.clickFinishButton();
+        CheckoutComplete checkoutComplete = new CheckoutComplete(driver);
+
+        Assert.assertEquals(checkoutComplete.getPageHeader(), HEADER_CHECKOUT_COMPLETE);
+        Assert.assertEquals(checkoutComplete.getOrderHeader(), ORDER_HEADER);
+        Assert.assertEquals(checkoutComplete.getConfirmationText(), ORDER_MESSAGE);
+        Assert.assertTrue(checkoutComplete.backHomeButtonDisplayed());
     }
 }
