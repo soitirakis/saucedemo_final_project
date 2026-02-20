@@ -1,6 +1,5 @@
 import driver.DriverFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -10,11 +9,11 @@ import testdata.URL;
 import testdata.classes.Login;
 
 public class BaseTests {
-    static WebDriver driver;
-    static LoginPage loginPage;
-    static InventoryPage inventoryPage;
+    protected WebDriver driver;
+    protected LoginPage loginPage;
+    protected InventoryPage inventoryPage;
 
-    Login loginUser;
+    protected Login loginUser;
 
     @BeforeMethod
     public void beforeMethod() {

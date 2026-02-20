@@ -37,16 +37,11 @@ public class InventoryTests extends BaseTests {
         int inventoryListSize = inventoryItemsList.size();
         String item = inventoryItemsList.get(generateNumber(inventoryListSize)); // generate random item from List
 
-        System.out.println("item: " + item);
-
         String itemToAddToCart = generateItemToAddToCart(item);  //generate item to be added to cart <<add-to-cart-name>>
         String itemRemoveButton = generateItemToRemoveFromCart(item); //generate item to be removed from cart <<remove-item-name>>
-        System.out.println("itemToClick: " + itemToAddToCart);
-        System.out.println("itemRemoveButton: " + itemRemoveButton);
 
         inventoryPage.addItemToCart(itemToAddToCart);   //add item to cart
 
-        Thread.sleep(2000);
         Assert.assertTrue(inventoryPage.removeFromCartButtonDisplayed(itemRemoveButton), "Remove button is not displayed: " +  itemRemoveButton);
         inventoryPage.waitCartBadgeVisible();  //wait for cart badge to be visible
         Assert.assertTrue(inventoryPage.shoppingCartBadgeDisplayed(), "Cart badge is not displayed: " +  itemRemoveButton);
@@ -54,7 +49,6 @@ public class InventoryTests extends BaseTests {
 
         inventoryPage.waitRemoveButtonDisplayed(itemRemoveButton);  //wait for the remove button to be displayed
         inventoryPage.removeItemFromCart(itemRemoveButton);  //remove the item from cart
-        Thread.sleep(2000);
         inventoryPage.addItemToCartButtonDisplayed(itemToAddToCart); //wait for <<add to cart>> button to be displayed
 
 
@@ -69,7 +63,7 @@ public class InventoryTests extends BaseTests {
         shoppingCart = new  ShoppingCart(driver);//item to be added
 
         String title = itemDetails.getTitle();
-        System.out.println("title: " + title);
+
         String itemToAddToCart =  generateItemToAddToCart(title);
         String itemToRemove = generateItemToRemoveFromCart(title);
 
@@ -189,5 +183,13 @@ public class InventoryTests extends BaseTests {
         Assert.assertEquals(checkoutComplete.getOrderHeader(), ORDER_HEADER);
         Assert.assertEquals(checkoutComplete.getConfirmationText(), ORDER_MESSAGE);
         Assert.assertTrue(checkoutComplete.backHomeButtonDisplayed());
+    }
+    @Test
+    public void sortElementsZtoATests () {
+        inventoryPage.sortItemsZtoA();
+
+        List<String> inventoryItemsList = inventoryPage.getInventoryListItems(); //list of article names in inventory
+        System.out.println("inventoryItemsList: " + inventoryItemsList);
+
     }
 }

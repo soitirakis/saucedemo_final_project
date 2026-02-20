@@ -12,6 +12,7 @@ public class InventoryItemPage extends BasePage{
     private By backToProductsButton = By.id("back-to-products");
     private By inventoryItemName = By.xpath("//div[@data-test='inventory-item-name']");
     private By inventoryItemDescription = By.xpath("//div[@data-test='inventory-item-desc']");
+    private By inventoryItemPrice = By.xpath("//div[@data-test='inventory-item-price']");
     private By addToCartButton = By.xpath("//button[@id='add-to-cart']");
     private By removeFromCartButton = By.id("remove");
     private By shoppingCart = By.xpath("//a[@data-test='shopping-cart-link']");
@@ -25,6 +26,9 @@ public class InventoryItemPage extends BasePage{
     }
     public String getInventoryItemDescription() {
         return driver.findElement(inventoryItemDescription).getText();
+    }
+    public String getInventoryItemPrice() {
+        return driver.findElement(inventoryItemPrice).getText();
     }
     public void addToCart() {
         driver.findElement(addToCartButton).click();

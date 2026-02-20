@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import testdata.classes.CheckoutInformation;
 
+import static testdata.pages.CheckoutStepOneTestData.HEADER_STEP_ONE;
+
 public class CheckoutStepOne extends BasePage {
     public CheckoutStepOne(WebDriver driver) {
         super(driver);
@@ -14,13 +16,14 @@ public class CheckoutStepOne extends BasePage {
     private By zipCodeInput = By.id("postal-code");
     private By continueButton = By.id("continue");
     private By errorMessage = By.xpath("//h3[contains(@data-test, 'error')]");
-    private By checkoutInformationTitle = By.xpath("//span[contains(@data-test, 'title')][contains(.,'Checkout: Your Information')]");
+    private By checkoutInformationTitle = By.xpath("//span[contains(@data-test, 'title')][contains(.,\""+HEADER_STEP_ONE+"\")]");
 
     //actions
     public boolean getCheckoutInformationTitleDisplayed() {
         return driver.findElement(checkoutInformationTitle).isDisplayed();
     }
     public String getErrorMessage() throws InterruptedException {
+        Thread.sleep(2000);
         return driver.findElement(errorMessage).getText();
     }
 

@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,13 @@ public class InventoryPage extends BasePage{
     private By logoutButton = By.id("logout_sidebar_link");
     private By shoppingCart = By.id("shopping_cart_container");
     private By inventoryItemName = By.className("inventory_item_name");
+    private By inventoryItemPrice = By.className("inventory_item_price");
     private By shoppingCartBadge = By.className("shopping_cart_badge");
+
+    private By sortAscenAtoZ = By.xpath("//option[contains(@value, 'az')]");
+    private By sortDescZtoA = By.xpath("//option[contains(@value, 'za')]");
+    private By sortPriceLowToHigh = By.xpath("//option[contains(@value, 'lohi')]");
+    private By sortPriceHighToLow = By.xpath("//option[contains(@value, 'hilo')]");
 
 
     //elements containers actions
@@ -53,12 +59,20 @@ public class InventoryPage extends BasePage{
         }
         return items;
     }
+    public List<String> getInventoryItemPrice() {
+        List<WebElement> classInventoryItems = driver.findElements(inventoryItemPrice);
+        List<String> itemsPrice = new ArrayList<>();
+        for (WebElement itemPrice : classInventoryItems){
+            itemsPrice.add(itemPrice.getText());
+        }
+        return itemsPrice;
+    }
+
+
     public void addItemToCart(String item) {
         WaitUtils.elementToBeClickable(addToCartButton(item)).click();
-        //driver.findElement(addToCartButton(item)).click();
     }
     public void removeItemFromCart(String item) throws InterruptedException{
-        System.out.println("Click remove: " +item);
 
         WaitUtils.elementToBeClickable(removeFromCartButton(item));
         WaitUtils.textToBePresentInElementLocated(removeFromCartButton(item), "Remove");
@@ -69,11 +83,13 @@ public class InventoryPage extends BasePage{
             System.out.println("click failed: " + e.getMessage());
             throw e;
         }
-        System.out.println("Clicked remove");
     }
+
     public String getRemoveButtonText(String item) {
         return driver.findElement(removeFromCartButton(item)).getText();
     }
+
+    //isDisplayed
     public boolean addItemToCartButtonDisplayed(String item) {
         try {
             WaitUtils.visibilityOfElementLocated(addToCartButton(item)).isDisplayed();
@@ -94,6 +110,8 @@ public class InventoryPage extends BasePage{
         List<WebElement> shoppingCartItems = driver.findElements(shoppingCartBadge);
         return !shoppingCartItems.isEmpty() && shoppingCartItems.get(0).isDisplayed();
     }
+
+    //waits
     public void waitCartBadgeVisible() {
         WaitUtils.visibilityOfElementLocated(shoppingCartBadge);
     }
@@ -104,12 +122,26 @@ public class InventoryPage extends BasePage{
         WaitUtils.visibilityOfElementLocated(removeFromCartButton(item));
     }
 
+    //click on buttons
     public void clickOnRandomItem(String item) {
-        System.out.println(item);
         driver.findElement(clickOnItem(item)).click();
     }
 
     public void clickOnShoppingCart(){
         driver.findElement(shoppingCart).click();
+    }
+
+    //sort elements
+    public void sortItemsAtoZ () {
+        driver.findElement(sortAscenAtoZ).click();
+    }
+    public void sortItemsZtoA() {
+        driver.findElement(sortDescZtoA).click();
+    }
+    public void sortItemsByPriceLowToHigh() {
+        driver.findElement(sortPriceLowToHigh).click();
+    }
+    public void sortItemsByPriceHighToLow() {
+        driver.findElement(sortPriceHighToLow).click();
     }
 }
