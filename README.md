@@ -1,5 +1,16 @@
 # SauceDemo Test Automation Framework
 
+
+![Java](https://img.shields.io/badge/Java-17-blue)
+![Selenium](https://img.shields.io/badge/Selenium-4-green)
+![TestNG](https://img.shields.io/badge/TestNG-Framework-orange)
+![Maven](https://img.shields.io/badge/Maven-Build-red)
+![CI](https://github.com/soitirakis/saucedemo_final_project/actions/workflows/ci.yml/badge.svg)
+
+---
+
+Automated UI testing project for the SauceDemo application built with Java, Selenium WebDriver, TestNG, and Maven.
+
 Automated UI testing project for the SauceDemo application built with **Java, Selenium WebDriver, TestNG, and Maven**.
 
 This project demonstrates a clean and scalable automation framework structure using industry best practices.
