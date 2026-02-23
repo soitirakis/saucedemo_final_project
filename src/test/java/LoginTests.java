@@ -24,6 +24,7 @@ public class LoginTests extends BaseTests{
 
         Assert.assertEquals(loginPage.getHeader(), HEADER_LOGIN);
         Assert.assertEquals(loginPage.getErrorMessage(), LOCKED_OUT_USER);
+        Assert.assertTrue(loginPage.isLoginDisplayed());
     }
     @Test
     public void missingUserTest() throws InterruptedException{
@@ -32,5 +33,6 @@ public class LoginTests extends BaseTests{
 
         Assert.assertEquals(loginPage.getHeader(), HEADER_LOGIN);
         Assert.assertEquals(loginPage.getErrorMessage(), MISSING_USER);
+        Assert.assertTrue(loginPage.isLoginDisplayed());
     }
 }
