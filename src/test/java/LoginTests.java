@@ -12,6 +12,10 @@ public class LoginTests extends BaseTests{
 
         Assert.assertTrue(inventoryPage.isShoppingCartDisplayed());
         Assert.assertEquals(inventoryPage.getHeaderText(), "Swag Labs");
+        Assert.assertTrue(inventoryPage.isBurgerMenuButtonDisplayed());
+
+        inventoryPage.clickOnBurgerMenuButton();
+        Assert.assertTrue(inventoryPage.isLogoutDisplayed());
     }
     @Test
     public void lockedOutUserTest() throws InterruptedException{

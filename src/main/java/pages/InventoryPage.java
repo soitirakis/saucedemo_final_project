@@ -46,6 +46,10 @@ public class InventoryPage extends BasePage{
     public String getHeaderText(){
         return driver.findElement(header).getText();
     }
+    public boolean isBurgerMenuButtonDisplayed(){
+        WaitUtils.visibilityOfElementLocated(burgerMenuButton);
+        return driver.findElement(burgerMenuButton).isDisplayed();
+    }
     public void clickOnBurgerMenuButton(){
         driver.findElement(burgerMenuButton).click();
     }
