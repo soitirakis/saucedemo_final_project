@@ -8,6 +8,8 @@ import pages.LoginPage;
 import testdata.URL;
 import testdata.classes.Login;
 
+import static testdata.pages.LoginTestData.HEADER_LOGIN;
+
 public class BaseTests {
     protected WebDriver driver;
     protected LoginPage loginPage;
@@ -23,7 +25,7 @@ public class BaseTests {
         inventoryPage = new InventoryPage(driver);
         driver.get(URL.MAIN_URL);
 
-        Assert.assertEquals(loginPage.getHeader(), "Swag Labs");
+        Assert.assertEquals(loginPage.getHeader(), HEADER_LOGIN);
     }
     @AfterMethod
     public void afterMethod() {
