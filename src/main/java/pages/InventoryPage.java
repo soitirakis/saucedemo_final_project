@@ -17,6 +17,7 @@ public class InventoryPage extends BasePage{
 
     //elements
     private By header = By.className("app_logo");
+    private By burgerMenuButton = By.id("react-burger-menu-btn");
     private By logoutButton = By.id("logout_sidebar_link");
     private By shoppingCart = By.id("shopping_cart_container");
     private By inventoryItemName = By.className("inventory_item_name");
@@ -45,8 +46,15 @@ public class InventoryPage extends BasePage{
     public String getHeaderText(){
         return driver.findElement(header).getText();
     }
+    public void clickOnBurgerMenuButton(){
+        driver.findElement(burgerMenuButton).click();
+    }
     public boolean isLogoutDisplayed(){
+        WaitUtils.visibilityOfElementLocated(logoutButton);
         return driver.findElement(logoutButton).isDisplayed();
+    }
+    public void clickLogoutButton(){
+        driver.findElement(logoutButton).click();
     }
     public boolean isShoppingCartDisplayed(){
         return driver.findElement(shoppingCart).isDisplayed();
@@ -85,9 +93,6 @@ public class InventoryPage extends BasePage{
         }
     }
 
-    public String getRemoveButtonText(String item) {
-        return driver.findElement(removeFromCartButton(item)).getText();
-    }
 
     //isDisplayed
     public boolean addItemToCartButtonDisplayed(String item) {

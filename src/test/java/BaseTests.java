@@ -29,5 +29,4 @@ public class BaseTests {
     public void afterMethod() {
         DriverFactory.closeDriver();
     }
-
 }
