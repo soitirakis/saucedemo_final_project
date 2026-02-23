@@ -25,9 +25,9 @@ public class BaseTests {
 
         Assert.assertEquals(loginPage.getHeader(), "Swag Labs");
     }
-   /* @AfterMethod
+    @AfterMethod
     public void afterMethod() {
         DriverFactory.closeDriver();
-    }*/
+    }
 
 }

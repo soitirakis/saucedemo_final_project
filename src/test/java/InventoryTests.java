@@ -132,7 +132,7 @@ public class InventoryTests extends BaseTests {
 
     @Test
     public void buyCertainItemTest() {
-        itemDetails = new ItemDetails("item_details"); //item: Sauce Labs Backpack
+        itemDetails = new ItemDetails("item_details"); //item: "Sauce Labs Backpack" from json
         shoppingCart = new  ShoppingCart(driver);
 
         String title = itemDetails.getTitle();
@@ -170,11 +170,11 @@ public class InventoryTests extends BaseTests {
         CheckoutStepTwo checkoutStepTwo = new CheckoutStepTwo(driver);
 
         Assert.assertEquals(checkoutStepTwo.getHeader(), "Checkout: Overview");
-        Assert.assertEquals(checkoutStepTwo.getItemName(), itemDetails.getTitle());
-        Assert.assertEquals(checkoutStepTwo.getItemDescription(), itemDetails.getDescription());
-        Assert.assertEquals(checkoutStepTwo.getItemPrice(), itemDetails.getPriceTag()+itemDetails.getPrice());
-        Assert.assertEquals(checkoutStepTwo.getTax(), itemDetails.getPriceTag()+itemDetails.getTax());
-        Assert.assertEquals(checkoutStepTwo.getTotalSum(),itemDetails.getPriceTag()+itemDetails.getTotalPrice());
+        Assert.assertEquals(checkoutStepTwo.getItemName(), itemDetails.getTitle());  //check item name same name from json
+        Assert.assertEquals(checkoutStepTwo.getItemDescription(), itemDetails.getDescription()); //check item description same
+        Assert.assertEquals(checkoutStepTwo.getItemPrice(), itemDetails.getPriceTag()+itemDetails.getPrice()); //check same price
+        Assert.assertEquals(checkoutStepTwo.getTax(), itemDetails.getPriceTag()+itemDetails.getTax()); //check same tax
+        Assert.assertEquals(checkoutStepTwo.getTotalSum(),itemDetails.getPriceTag()+itemDetails.getTotalPrice()); //check same total price
 
         checkoutStepTwo.clickFinishButton();
         CheckoutComplete checkoutComplete = new CheckoutComplete(driver);
@@ -183,13 +183,5 @@ public class InventoryTests extends BaseTests {
         Assert.assertEquals(checkoutComplete.getOrderHeader(), ORDER_HEADER);
         Assert.assertEquals(checkoutComplete.getConfirmationText(), ORDER_MESSAGE);
         Assert.assertTrue(checkoutComplete.backHomeButtonDisplayed());
-    }
-    @Test
-    public void sortElementsZtoATests () {
-        inventoryPage.sortItemsZtoA();
-
-        List<String> inventoryItemsList = inventoryPage.getInventoryListItems(); //list of article names in inventory
-        System.out.println("inventoryItemsList: " + inventoryItemsList);
-
     }
 }

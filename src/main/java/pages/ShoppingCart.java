@@ -7,13 +7,15 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static testdata.pages.ShoppingCartTestData.SHOPPING_CART_HEADER;
+
 public class ShoppingCart extends BasePage{
     public ShoppingCart(WebDriver driver) {
         super(driver);
     }
 
     //elements
-    private By yourCartTitle = By.xpath("//span[contains(@data-test,'title')][contains(.,'Your Cart')]");
+    private By yourCartTitle = By.xpath("//span[contains(@data-test,'title')][contains(.,\""+SHOPPING_CART_HEADER+"\")]");
     private By itemInventoryName = By.className("inventory_item_name");
     private By itemDescription = By.className("inventory_item_desc");
     private By itemPrice = By.className("inventory_item_price");

@@ -13,17 +13,17 @@ public class RandomGenerator {
 
     public static String generateItemFormat(String item) {
         String itemToLower = item.toLowerCase(Locale.ENGLISH);
-        String itemToFormat = itemToLower.trim().replaceAll("\\s+", "-");
+        String itemToFormat = itemToLower.trim().replaceAll("\\s+", "-"); //item-name-xyz
         return itemToFormat;
     }
 
     public static String generateItemToAddToCart(String item) {
-        String prefix = "add-to-cart-";
+        String prefix = "add-to-cart-"; //add-to-cart-item-name
         String result = prefix + generateItemFormat(item);
         return result;
     }
     public static String generateItemToRemoveFromCart(String item) {
-        String prefix = "remove-";
+        String prefix = "remove-"; //remove-item-name
         String result = prefix + generateItemFormat(item);
         return result;
     }
