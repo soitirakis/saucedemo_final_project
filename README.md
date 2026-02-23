@@ -5,7 +5,7 @@
 ![Selenium](https://img.shields.io/badge/Selenium-4-green)
 ![TestNG](https://img.shields.io/badge/TestNG-Framework-orange)
 ![Maven](https://img.shields.io/badge/Maven-Build-red)
-![CI](https://github.com/soitirakis/saucedemo_final_project/actions/workflows/ci.yml/badge.svg)
+
 
 ---
 
