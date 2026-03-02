@@ -26,11 +26,6 @@ public class CheckoutStepOne extends BasePage {
     public boolean getCheckoutInformationTitleDisplayed() {
         return driver.findElement(checkoutInformationTitle).isDisplayed();
     }
-   /* public String getErrorMessage() throws InterruptedException {
-        Thread.sleep(2000);
-        return driver.findElement(errorMessage).getText();
-    }*/
-
     public String getErrorMessage() {
         try {
             WaitUtils.visibilityOfElementLocated(errorMessage);

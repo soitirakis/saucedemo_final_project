@@ -36,7 +36,7 @@ public class UserInformationTests extends BaseTests{
         shoppingCart.clickOnCheckoutButton();
     }
     @Test
-    public void missingUserInformationTest() throws InterruptedException
+    public void missingUserInformationTest()
     {
         userInformation = new CheckoutInformation("user_information_missing");
         checkoutStepOne.checkoutInformationContinueButton(userInformation);
@@ -45,7 +45,7 @@ public class UserInformationTests extends BaseTests{
         Assert.assertEquals(checkoutStepOne.getErrorMessage(), ERROR_FIRST_NAME_MISSING );
     }
     @Test
-    public void missingLastNameTest() throws InterruptedException
+    public void missingLastNameTest()
     {
         userInformation = new CheckoutInformation("user_information_missing_last_name");
         checkoutStepOne.checkoutInformationContinueButton(userInformation);
@@ -54,7 +54,7 @@ public class UserInformationTests extends BaseTests{
         Assert.assertEquals(checkoutStepOne.getErrorMessage(), ERROR_LAST_NAME_MISSING );
     }
     @Test
-    public void  missingPostCodeTest() throws InterruptedException
+    public void  missingPostCodeTest()
     {
         userInformation = new CheckoutInformation("user_information_missing_postcode");
         checkoutStepOne.checkoutInformationContinueButton(userInformation);
@@ -63,21 +63,21 @@ public class UserInformationTests extends BaseTests{
         Assert.assertEquals(checkoutStepOne.getErrorMessage(), ERROR_POSTCODE_MISSING );
     }
     @Test
-    public void maxCharactersFirstNameTest() throws InterruptedException{
+    public void maxCharactersFirstNameTest() {
         userInformation = new CheckoutInformation("user_information_max_characters_first_name");
         checkoutStepOne.checkoutInformationContinueButton(userInformation);
 
         Assert.assertEquals(checkoutStepOne.getErrorMessage(), ERROR_NAME_TOO_LONG );
     }
     @Test
-    public void maxCharactersLastNameTest() throws InterruptedException{
+    public void maxCharactersLastNameTest(){
         userInformation = new CheckoutInformation("user_information_max_characters_last_name");
         checkoutStepOne.checkoutInformationContinueButton(userInformation);
 
         Assert.assertEquals(checkoutStepOne.getErrorMessage(), ERROR_NAME_TOO_LONG );
     }
     @Test
-    public void maxCharactersPostCodeTest() throws InterruptedException{
+    public void maxCharactersPostCodeTest(){
         userInformation = new CheckoutInformation("user_information_max_characters_postcode");
         checkoutStepOne.checkoutInformationContinueButton(userInformation);
 
