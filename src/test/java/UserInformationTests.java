@@ -62,4 +62,25 @@ public class UserInformationTests extends BaseTests{
         Assert.assertTrue(checkoutStepOne.getCheckoutInformationTitleDisplayed());
         Assert.assertEquals(checkoutStepOne.getErrorMessage(), ERROR_POSTCODE_MISSING );
     }
+    @Test
+    public void maxCharactersFirstNameTest() throws InterruptedException{
+        userInformation = new CheckoutInformation("user_information_max_characters_first_name");
+        checkoutStepOne.checkoutInformationContinueButton(userInformation);
+
+        Assert.assertEquals(checkoutStepOne.getErrorMessage(), ERROR_NAME_TOO_LONG );
+    }
+    @Test
+    public void maxCharactersLastNameTest() throws InterruptedException{
+        userInformation = new CheckoutInformation("user_information_max_characters_last_name");
+        checkoutStepOne.checkoutInformationContinueButton(userInformation);
+
+        Assert.assertEquals(checkoutStepOne.getErrorMessage(), ERROR_NAME_TOO_LONG );
+    }
+    @Test
+    public void maxCharactersPostCodeTest() throws InterruptedException{
+        userInformation = new CheckoutInformation("user_information_max_characters_postcode");
+        checkoutStepOne.checkoutInformationContinueButton(userInformation);
+
+        Assert.assertEquals(checkoutStepOne.getErrorMessage(), ERROR_POSTCODE_TOO_LONG);
+    }
 }

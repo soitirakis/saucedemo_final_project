@@ -1,8 +1,12 @@
 package pages;
 
+import driver.WaitUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import testdata.classes.CheckoutInformation;
+
+import java.util.Optional;
 
 import static testdata.pages.CheckoutStepOneTestData.HEADER_STEP_ONE;
 
@@ -22,9 +26,18 @@ public class CheckoutStepOne extends BasePage {
     public boolean getCheckoutInformationTitleDisplayed() {
         return driver.findElement(checkoutInformationTitle).isDisplayed();
     }
-    public String getErrorMessage() throws InterruptedException {
+   /* public String getErrorMessage() throws InterruptedException {
         Thread.sleep(2000);
         return driver.findElement(errorMessage).getText();
+    }*/
+
+    public String getErrorMessage() {
+        try {
+            WaitUtils.visibilityOfElementLocated(errorMessage);
+            return driver.findElement(errorMessage).getText();
+        } catch (TimeoutException e) {
+            return null;
+        }
     }
 
     public void addFirstName(String firstName) {
