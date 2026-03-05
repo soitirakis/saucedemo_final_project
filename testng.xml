@@ -4,10 +4,9 @@
         <classes>
             <class name="LoginTests"/>
             <class name="InventoryTests"/>
-            <class name="ItemPageTests"/>
             <class name="FilterTests"/>
-            <class name="LogoutTests"/>
             <class name="UserInformationTests"/>
+            <class name="EndToEndTests"/>
         </classes>
     </test>
 </suite>

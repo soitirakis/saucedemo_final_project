@@ -1,5 +1,5 @@
 {
   "firstName" : "abcdef",
-  "lastName" : "abcdefghijklmnopqrstuvwxyzaabbccdd", //34 characters
+  "lastName" : "abcdefghijklmnopqrstuvwxyzaabbccdd",
   "zipCode" : "12345"
 }

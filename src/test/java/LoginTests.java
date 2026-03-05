@@ -35,4 +35,22 @@ public class LoginTests extends BaseTests{
         Assert.assertEquals(loginPage.getErrorMessage(), MISSING_USER);
         Assert.assertTrue(loginPage.isLoginDisplayed());
     }
+
+    //logout
+    @Test
+    public void validLogoutTest(){
+        loginUser =  new Login("standard_user");
+        loginPage.authenticate(loginUser);
+
+        Assert.assertEquals(inventoryPage.getHeaderText(), HEADER_LOGIN);
+        Assert.assertTrue(inventoryPage.isShoppingCartDisplayed());
+
+        inventoryPage.clickOnBurgerMenuButton();
+
+        Assert.assertTrue(inventoryPage.isLogoutDisplayed());
+        inventoryPage.clickLogoutButton();
+
+        Assert.assertEquals(loginPage.getHeader(), HEADER_LOGIN);
+        Assert.assertTrue(loginPage.isLoginDisplayed());
+    }
 }
