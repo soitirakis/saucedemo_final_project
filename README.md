@@ -81,6 +81,7 @@ saucedemo_final_project/
 │               └── LoginTests.java
 |               └── InventoryTests.java
 |               └── FilterTests.java
+|               └── EndToEndTests.java
 |               └── UserInformationTests.java
 │                   
 │
