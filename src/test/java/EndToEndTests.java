@@ -33,7 +33,7 @@ public class EndToEndTests extends BaseTests{
     }
     @Test
     public void buyCertainItemTest() {
-        itemDetails = new ItemDetails("item_details"); //item: "Sauce Labs Backpack" from json
+        itemDetails = new ItemDetails("item_product"); //item: "Sauce Labs Backpack" from json
         shoppingCart = new ShoppingCart(driver);
 
         String title = itemDetails.getTitle();
@@ -41,7 +41,8 @@ public class EndToEndTests extends BaseTests{
         String itemToAddToCart =  generateItemToAddToCart(title);
         String itemToRemove = generateItemToRemoveFromCart(title);
 
-        inventoryPage.addItemToCart(itemToAddToCart);  //add item to cart
+        //change itemToAddToCart to getId();
+        inventoryPage.addItemToCart(itemDetails.getId());  //add item to cart
         inventoryPage.clickOnShoppingCart();  //go to shopping cart
 
         Assert.assertTrue(shoppingCart.isYourCartTitleDisplayed());
@@ -50,7 +51,7 @@ public class EndToEndTests extends BaseTests{
         Assert.assertEquals(shoppingCart.getItemDescription(), itemDetails.getDescription()); //have same description
         Assert.assertEquals(shoppingCart.getItemPrice(), itemDetails.getPriceTag()+itemDetails.getPrice()); //have same price
         Assert.assertTrue(shoppingCart.setCheckoutButtonDisplayed());
-        Assert.assertTrue(shoppingCart.isRemoveButtonDisplayed(itemToRemove), "Remove button is not displayed: " +  itemToRemove);
+        Assert.assertTrue(shoppingCart.isRemoveButtonDisplayed(itemDetails.getId()), "Remove button is not displayed: " +  itemToRemove);
 
         shoppingCart.clickOnCheckoutButton(); //checkout the product
         checkoutStepOne = new CheckoutStepOne(driver);
@@ -83,16 +84,16 @@ public class EndToEndTests extends BaseTests{
     }
     @Test
     public void checkoutWithEmptyCartTest() {
-        itemDetails = new ItemDetails("item_details"); //item: "Sauce Labs Backpack" from json
+        itemDetails = new ItemDetails("item_product"); //item: "Sauce Labs Backpack" from json
         itemEmptyDetails = new ItemDetails("item_empty_details");
         shoppingCart = new ShoppingCart(driver);
 
         String title = itemDetails.getTitle();
         System.out.println("title: " + title);
-        String itemToAddToCart =  generateItemToAddToCart(title);
-        String itemToRemove = generateItemToRemoveFromCart(title);
+        // itemToAddToCart =  generateItemToAddToCart(title);
+        //String itemToRemove = generateItemToRemoveFromCart(title);
 
-        inventoryPage.addItemToCart(itemToAddToCart);  //add item to cart
+        inventoryPage.addItemToCart(itemDetails.getId());  //add item to cart
         inventoryPage.clickOnShoppingCart();  //go to shopping cart
 
         Assert.assertTrue(shoppingCart.isYourCartTitleDisplayed());
@@ -101,12 +102,12 @@ public class EndToEndTests extends BaseTests{
         Assert.assertEquals(shoppingCart.getItemDescription(), itemDetails.getDescription()); //have same description
         Assert.assertEquals(shoppingCart.getItemPrice(), itemDetails.getPriceTag()+itemDetails.getPrice()); //have same price
         Assert.assertTrue(shoppingCart.setCheckoutButtonDisplayed());
-        Assert.assertTrue(shoppingCart.isRemoveButtonDisplayed(itemToRemove), "Remove button is not displayed: " +  itemToRemove);
+        Assert.assertTrue(shoppingCart.isRemoveButtonDisplayed(itemDetails.getId()), "Remove button is not displayed: " +  itemDetails.getId());
 
-        shoppingCart.clickOnRemoveButton(itemToRemove); //remove item
-        shoppingCart.waitRemoveButtonGone(itemToRemove);
-        Assert.assertFalse(shoppingCart.isRemoveButtonDisplayed(itemToRemove), "Remove button is not displayed: " +  itemToRemove);
-        Assert.assertFalse(shoppingCart.isItemDescriptionDisplayed(), "Item description is not displayed: " +  itemToRemove);
+        shoppingCart.clickOnRemoveButton(itemDetails.getId()); //remove item
+        shoppingCart.waitRemoveButtonGone(itemDetails.getId());
+        Assert.assertFalse(shoppingCart.isRemoveButtonDisplayed(itemDetails.getId()), "Remove button is not displayed: " +  itemDetails.getId());
+        Assert.assertFalse(shoppingCart.isItemDescriptionDisplayed(), "Item description is not displayed: " +  itemDetails.getId());
 
         shoppingCart.clickOnCheckoutButton(); //checkout the product
         checkoutStepOne = new CheckoutStepOne(driver);

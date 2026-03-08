@@ -4,6 +4,7 @@ import utils.Reader;
 
 public class ItemDetails {
     private String title;
+    private String id;
     private String description;
     private String price;
     private String tax;
@@ -12,6 +13,7 @@ public class ItemDetails {
 
     public ItemDetails(String filename) {
         this.title = Reader.json(filename).get("title").toString();
+        this.id = Reader.json(filename).get("id").toString();
         this.description = Reader.json(filename).get("description").toString();
         this.price = Reader.json(filename).get("price").toString();
         this.tax = Reader.json(filename).get("tax").toString();
@@ -65,5 +67,13 @@ public class ItemDetails {
 
     public void setPriceTag(String priceTag) {
         this.priceTag = priceTag;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

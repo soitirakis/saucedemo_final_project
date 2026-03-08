@@ -24,7 +24,7 @@ public class ShoppingCart extends BasePage{
 
     //elements containers actions
     private By removeButton (String item) {
-        return By.id(item);
+        return By.id("remove-"+item);
     }
 
     //actions // isDisplayed

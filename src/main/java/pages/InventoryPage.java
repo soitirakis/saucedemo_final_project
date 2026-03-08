@@ -32,10 +32,10 @@ public class InventoryPage extends BasePage{
 
     //elements containers actions
     private By addToCartButton(String item) {
-        return By.id(item);
+        return By.id("add-to-cart-"+item);
     }
     private By removeFromCartButton(String item) {
-        return By.id(item);
+        return By.id("remove-"+item);
     }
     private By clickOnItem(String item) {
         return By.xpath("//div[contains(@class,'inventory_item_name')][contains(.,\""+item+"\")]");

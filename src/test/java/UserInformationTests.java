@@ -25,12 +25,12 @@ public class UserInformationTests extends BaseTests{
         Assert.assertEquals(inventoryPage.getHeaderText(), HEADER_LOGIN);
         Assert.assertTrue(inventoryPage.isShoppingCartDisplayed());
 
-        itemDetails = new ItemDetails("item_details");
+        itemDetails = new ItemDetails("item_product");
         shoppingCart = new ShoppingCart(driver);
         checkoutStepOne = new CheckoutStepOne(driver);
 
         String itemToAddToCart = generateItemToAddToCart(itemDetails.getTitle());
-        inventoryPage.addItemToCart(itemToAddToCart);
+        inventoryPage.addItemToCart(itemDetails.getId());
 
         inventoryPage.clickOnShoppingCart();
         shoppingCart.clickOnCheckoutButton();
