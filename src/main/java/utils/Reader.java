@@ -10,7 +10,8 @@ import java.io.IOException;
 
 public class Reader {
     public static JSONObject json(String name) {
-        String jsonPath=System.getProperty("user.dir")+"\\src\\main\\java\\testdata\\files\\"+name+".json";
+        //String jsonPath=System.getProperty("user.dir")+"\\src\\main\\java\\testdata\\files\\"+name+".json"; //for Windows
+        String jsonPath=System.getProperty("user.dir")+"/src/main/java/testdata/files/"+name+".json";
 
         //read the json file from the specified location
         FileReader reader = null;

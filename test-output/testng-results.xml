@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="5" total="6" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2026-03-08T20:52:29 CET" name="Default Suite" finished-at="2026-03-08T20:52:35 CET" duration-ms="5709">
+    <groups>
+    </groups>
+    <test started-at="2026-03-08T20:52:29 CET" name="saucedemo_final_project" finished-at="2026-03-08T20:52:35 CET" duration-ms="5709">
+      <class name="UserInformationTests">
+        <test-method is-config="true" signature="beforeMethod()[pri:0, instance:UserInformationTests@69453e37]" started-at="2026-03-08T20:52:29 CET" name="beforeMethod" finished-at="2026-03-08T20:52:33 CET" duration-ms="4339" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method signature="missingPostCodeTest()[pri:0, instance:UserInformationTests@69453e37]" started-at="2026-03-08T20:52:33 CET" name="missingPostCodeTest" finished-at="2026-03-08T20:52:34 CET" duration-ms="992" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- missingPostCodeTest -->
+        <test-method is-config="true" signature="afterMethod()[pri:0, instance:UserInformationTests@69453e37]" started-at="2026-03-08T20:52:34 CET" name="afterMethod" finished-at="2026-03-08T20:52:35 CET" duration-ms="319" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+      </class> <!-- UserInformationTests -->
+    </test> <!-- saucedemo_final_project -->
+  </suite> <!-- Default Suite -->
+</testng-results>
