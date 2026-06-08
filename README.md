@@ -1,16 +1,12 @@
 # SauceDemo Test Automation Framework
 
-
 ![Java](https://img.shields.io/badge/Java-25-blue)
 ![Selenium](https://img.shields.io/badge/Selenium-4-green)
 ![TestNG](https://img.shields.io/badge/TestNG-Framework-orange)
 ![Maven](https://img.shields.io/badge/Maven-Build-red)
 ![CI](https://github.com/soitirakis/saucedemo_final_project/actions/workflows/run-tests.yml/badge.svg)
 
-
 ---
-
-Automated UI testing project for the SauceDemo application built with Java, Selenium WebDriver, TestNG, and Maven.
 
 Automated UI testing project for the SauceDemo application built with **Java, Selenium WebDriver, TestNG, and Maven**.
 
@@ -34,7 +30,7 @@ The framework is structured for maintainability, scalability, and clarity.
 
 ## 🛠 Tech Stack
 
-- Java
+- Java 17
 - Maven
 - Selenium WebDriver
 - TestNG
@@ -46,47 +42,42 @@ The framework is structured for maintainability, scalability, and clarity.
 
 ## 📁 Project Structure
 
----
 ```
 saucedemo_final_project/
 ├── .github/
 │   └── workflows/
 │       └── run-tests.yml          # GitHub Actions CI pipeline
-│
 ├── src/
 │   ├── main/
 │   │   └── java/
-|   |        └── driver/            
-│   │          ├── DriverFactory.java
-│   │          ├── WaitUtils.java
-│   │        └── pages/               # Page Object Model (POM) classes
-│   │          ├── BasePage.java
-│   │          ├── LoginPage.java
-│   │          └── InventoryPage.java
-│   │          ├── ShoppingCart.java
-│   │          └── CheckoutSteps.java
-│   │        └── testdata/             # Test data classes, json files, constants 
-│   │          ├── classes
-│   │          ├── files
-│   │          └── pages
-│   │        └── utils/             
-│   │          ├── Reader.java
-│   │          ├── Writer.java
-│   │          ├── RandomGenerator
-│   │          └── SortedGenerator
-│   │   
+│   │       ├── driver/
+│   │       │   ├── DriverFactory.java
+│   │       │   └── WaitUtils.java
+│   │       ├── pages/             # Page Object Model (POM) classes
+│   │       │   ├── BasePage.java
+│   │       │   ├── LoginPage.java
+│   │       │   ├── InventoryPage.java
+│   │       │   ├── ShoppingCart.java
+│   │       │   └── CheckoutSteps.java
+│   │       ├── testdata/          # Test data classes, json files, constants
+│   │       │   ├── classes/
+│   │       │   ├── files/
+│   │       │   └── pages/
+│   │       └── utils/
+│   │           ├── Reader.java
+│   │           ├── Writer.java
+│   │           ├── RandomGenerator.java
+│   │           └── SortedGenerators.java
 │   └── test/
-│       └──  java/
-│             └── tests/             # Test classes
-│               ├── BaseTests.java
-│               └── LoginTests.java
-|               └── InventoryTests.java
-|               └── FilterTests.java
-|               └── EndToEndTests.java
-|               └── UserInformationTests.java
-│                   
-│
+│       └── java/                  # Test classes
+│           ├── BaseTests.java
+│           ├── LoginTests.java
+│           ├── InventoryTests.java
+│           ├── FilterTests.java
+│           ├── EndToEndTests.java
+│           └── UserInformationTests.java
 ├── pom.xml                        # Maven dependencies & build config
+├── testng.xml                     # TestNG suite definition
 ├── README.md                      # Project documentation
 └── .gitignore                     # Git ignored files
 ```
@@ -145,6 +136,8 @@ mvn clean test -Dheadless=true
 
 Reports are written to `target/surefire-reports/`.
 
+---
+
 ## 📐 Design Principles Used
 
 This framework follows industry best practices to ensure scalability, readability, and maintainability.
@@ -187,9 +180,11 @@ The project structure supports:
 - Parallel execution (future improvement)
 - CI/CD integration
 
+---
+
 ## 👤 Author
 
-**[Andrei]**
+**Andrei**
 
 QA Automation  
 Specialized in Java-based test automation frameworks.
