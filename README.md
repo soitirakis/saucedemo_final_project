@@ -1,7 +1,7 @@
 # SauceDemo Test Automation Framework
 
 
-![Java](https://img.shields.io/badge/Java-17-blue)
+![Java](https://img.shields.io/badge/Java-25-blue)
 ![Selenium](https://img.shields.io/badge/Selenium-4-green)
 ![TestNG](https://img.shields.io/badge/TestNG-Framework-orange)
 ![Maven](https://img.shields.io/badge/Maven-Build-red)
@@ -98,7 +98,7 @@ Tests run automatically on every push and pull request to `main` via GitHub Acti
 **Workflow:** `.github/workflows/run-tests.yml`
 
 - Runner: `ubuntu-latest`
-- JDK: 17 (Temurin)
+- JDK: 25 (Temurin)
 - Chrome: latest (headless via `--headless=new`)
 - Command: `mvn clean test -Dheadless=true`
 - Artifacts: Surefire reports uploaded on every run (pass or fail)
