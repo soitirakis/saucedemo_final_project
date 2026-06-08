@@ -5,6 +5,7 @@
 ![Selenium](https://img.shields.io/badge/Selenium-4-green)
 ![TestNG](https://img.shields.io/badge/TestNG-Framework-orange)
 ![Maven](https://img.shields.io/badge/Maven-Build-red)
+![CI](https://github.com/soitirakis/saucedemo_final_project/actions/workflows/run-tests.yml/badge.svg)
 
 
 ---
@@ -90,6 +91,26 @@ saucedemo_final_project/
 └── .gitignore                     # Git ignored files
 ```
 
+## CI/CD
+
+Tests run automatically on every push and pull request to `main` via GitHub Actions.
+
+**Workflow:** `.github/workflows/run-tests.yml`
+
+- Runner: `ubuntu-latest`
+- JDK: 17 (Temurin)
+- Chrome: latest (headless via `--headless=new`)
+- Command: `mvn clean test -Dheadless=true`
+- Artifacts: Surefire reports uploaded on every run (pass or fail)
+
+To force headless mode locally:
+
+```bash
+mvn clean test -Dheadless=true
+```
+
+---
+
 ## 🚀 How to Run the Tests
 
 Follow the steps below to execute the automated test suite locally.
@@ -98,42 +119,31 @@ Follow the steps below to execute the automated test suite locally.
 
 Make sure you have installed:
 
-- Java JDK (recommended: 17+)
+- Java JDK 17+
 - Maven
-- Google Chrome or Firefox
+- Google Chrome
 
 Verify installation:
 
 ```bash
-
 java -version
 mvn -version
+```
 
+Clone and run:
+
+```bash
 git clone https://github.com/soitirakis/saucedemo_final_project.git
 cd saucedemo_final_project
 
-mvn clean install
-
+# Run full suite (headed)
 mvn clean test
 
-mvn clean test -Dsurefire.suiteXmlFiles=testng.xml
-
-mvn clean test -Dbrowser=chrome
-
-mvn clean test -Dbrowser=firefox
-
-target/surefire-reports/
-
-
----
-
-If you'd like, I can also:
-- Add a **CI section (GitHub Actions ready)**
-- Make it more “Senior QA Engineer portfolio style”
-- Or tailor it exactly to your framework (if you paste your test runner structure)
-
-Just tell me the level you’re aiming for 🚀
+# Run headless (same as CI)
+mvn clean test -Dheadless=true
 ```
+
+Reports are written to `target/surefire-reports/`.
 
 ## 📐 Design Principles Used
 

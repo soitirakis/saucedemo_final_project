@@ -22,7 +22,16 @@ public class DriverFactory {
         chromeOption.addArguments("no-default-browser-check"); // Skip default browser check
         chromeOption.addArguments("--disable-search-engine-choice-screen");
 
-        chromeOption.addArguments("start-maximized"); // Open browser in maximized mode
+        if ("true".equalsIgnoreCase(System.getProperty("headless", System.getenv("CI") != null ? "true" : "false"))) {
+            chromeOption.addArguments("--headless=new");
+            chromeOption.addArguments("--no-sandbox");
+            chromeOption.addArguments("--disable-dev-shm-usage");
+            chromeOption.addArguments("--disable-gpu");
+            chromeOption.addArguments("--window-size=1920,1080");
+        } else {
+            chromeOption.addArguments("start-maximized");
+        }
+
         chromeOption.addArguments("disable-notifications"); // Disable notifications
         chromeOption.addArguments("disable-extensions"); // Disable extensions
         chromeOption.addArguments("guest"); // Disable change password popup
@@ -36,7 +45,6 @@ public class DriverFactory {
         chromeOption.addArguments("--disable-notifications");
 
         driver = new ChromeDriver(chromeOption);
-        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
 
         return driver;
